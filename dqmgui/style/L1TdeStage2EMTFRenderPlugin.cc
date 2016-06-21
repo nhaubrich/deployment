@@ -9,14 +9,14 @@
 #include "TH2F.h"
 #include "TStyle.h"
 
-class L1TStage2EMTFEMURenderPlugin : public DQMRenderPlugin {
+class L1TdeStage2EMTFRenderPlugin : public DQMRenderPlugin {
 
  public:
 
   virtual bool applies(const VisDQMObject& o, const VisDQMImgInfo&) {
-    if (o.name.find("L1T2016EMU/L1TStage2EMTFEMU/") != std::string::npos)
+    if (o.name.find("L1T2016EMU/L1TdeStage2EMTF/") != std::string::npos){
       return true;
-
+    }
     return false;
   }
 
@@ -41,21 +41,26 @@ class L1TStage2EMTFEMURenderPlugin : public DQMRenderPlugin {
   void preDrawTH1F(TCanvas*, const VisDQMObject& o) {
     TH1F* obj = dynamic_cast<TH1F*>(o.object);
     assert(obj);
-
-    if (o.name.find("emtfTrackPt") != std::string::npos) {
-      gPad->SetLogy(1);
-    }
-
-    if (o.name.find("emtfMuonhwPt") != std::string::npos) {
-      gPad->SetLogy(1);
-    }
   }
 
   void preDrawTH2F(TCanvas*, const VisDQMObject& o) {
     TH2F* obj = dynamic_cast<TH2F*>(o.object);
     assert(obj);
-
-    obj->SetOption("colz");
+    if (o.name.find("emtfComparenMuonsEvent") != std::string::npos){
+      obj->SetOption("colztext");
+    }
+    else if (o.name.find("emtfMatchMode") != std::string::npos){
+      obj->SetOption("colztext");
+    }
+    else if (o.name.find("emtfMatchQuality") != std::string::npos){
+      obj->SetOption("colztext");
+    }
+    else if (o.name.find("emtfMatchTrackBx") != std::string::npos){
+      obj->SetOption("colztext");
+    }
+    else{
+      obj->SetOption("colz");
+    }
   }
 
   void postDrawTH1F(TCanvas*, const VisDQMObject& o) {
@@ -73,4 +78,4 @@ class L1TStage2EMTFEMURenderPlugin : public DQMRenderPlugin {
   }
 };
 
-static L1TStage2EMTFEMURenderPlugin instance;
+static L1TdeStage2EMTFRenderPlugin instance;
