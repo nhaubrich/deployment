@@ -45,7 +45,7 @@ class L1TStage2EMTFRenderPlugin : public DQMRenderPlugin {
     if (o.name.find("emtfTrackPt") != std::string::npos) {
       gPad->SetLogy(1);
     }
-
+    
     if (o.name.find("emtfMuonhwPt") != std::string::npos) {
       gPad->SetLogy(1);
     }
@@ -54,8 +54,19 @@ class L1TStage2EMTFRenderPlugin : public DQMRenderPlugin {
   void preDrawTH2F(TCanvas*, const VisDQMObject& o) {
     TH2F* obj = dynamic_cast<TH2F*>(o.object);
     assert(obj);
-
-    obj->SetOption("colz");
+    if (o.name.find("emtfHitBX") != std::string::npos){
+      obj->SetOption("colztext");
+    }
+    else if (o.name.find("emtfTrackBX") != std::string::npos){
+      obj->SetOption("colztext");
+    }   
+    else if (o.name.find("emtfTrackQualityVsMode") != std::string::npos){
+      obj->SetOption("colztext");
+    }
+    else{
+      obj->SetOption("colz");
+    }
+    
   }
 
   void postDrawTH1F(TCanvas*, const VisDQMObject& o) {
