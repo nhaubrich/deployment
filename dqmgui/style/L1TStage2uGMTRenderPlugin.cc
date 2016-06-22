@@ -80,21 +80,6 @@ class L1TStage2uGMTRenderPlugin : public DQMRenderPlugin {
     if (o.name.find("ugmtMuonBXvshwIso") != std::string::npos) {
       obj->SetOption("text colz");
     }
-
-    if (o.name.find("ugmtMuonPtvsEta") != std::string::npos) {
-      gPad->SetLogy(1);
-      gPad->SetLogz(1);
-    }
-
-    if (o.name.find("ugmtMuonPtvsPhi") != std::string::npos) {
-      gPad->SetLogy(1);
-      gPad->SetLogz(1);
-    }
-
-    if (o.name.find("ugmtMuonBXvshwPt") != std::string::npos) {
-      gPad->SetLogy(1);
-      gPad->SetLogz(1);
-    }
  
   }
 
